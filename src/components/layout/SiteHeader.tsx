@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import { headerNavItems } from "./navItems";
+import { Logo } from "../branding/Logo";
 
 type NavItemProps = {
   to: string;
@@ -47,7 +48,7 @@ export function SiteHeader() {
           <div className='flex items-center justify-between gap-4 py-4'>
             {/* Logo */}
             <NavLink to='/' className='min-w-0 flex items-center gap-3'>
-              Connor WG
+              <Logo />
             </NavLink>
 
             {/* Nav Items */}
