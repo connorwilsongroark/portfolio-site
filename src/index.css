@@ -6,7 +6,8 @@
   --color-surface-alt: #f1f5f9;
 
   --color-text: #0f172a;
-  --color-text-muted: #64748b;
+  --color-text-muted: #475569;
+  --color-text-subtle: #64748b;
 
   --color-border: #e2e8f0;
 
@@ -14,6 +15,7 @@
   --color-primary-hover: #2563eb;
   --color-primary-foreground: #ffffff;
 }
+
 /* DARK THEME OVERRIDES */
 .dark {
   --color-background: #020617;
@@ -21,7 +23,8 @@
   --color-surface-alt: #1e293b;
 
   --color-text: #e2e8f0;
-  --color-text-muted: #94a3b8;
+  --color-text-muted: #cbd5e1;
+  --color-text-subtle: #94a3b8;
 
   --color-border: #1e293b;
 
@@ -32,4 +35,9 @@
 
 html {
   scrollbar-gutter: stable;
+}
+
+body {
+  background-color: var(--color-background);
+  color: var(--color-text);
 }

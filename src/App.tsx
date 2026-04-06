@@ -4,6 +4,7 @@ import { AppLayout } from "./layout/AppLayout";
 import { ProjectsPage } from "./pages/ProjectsPage";
 import { ExperiencePage } from "./pages/ExperiencePage";
 import { ContactPage } from "./pages/ContactPage";
+import { ProjectDetailsPage } from "./pages/ProjectDetailsPage";
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
       <Route element={<AppLayout />}>
         <Route path='/' element={<HomePage />} />
         <Route path='/projects' element={<ProjectsPage />} />
+        <Route path='/projects/:slug' element={<ProjectDetailsPage />} />
         <Route path='/experience' element={<ExperiencePage />} />
         <Route path='/contact' element={<ContactPage />} />
       </Route>
