@@ -1,14 +1,14 @@
 import { useParams } from "react-router-dom";
 import { PageContainer } from "../components/layout/PageContainer";
-import { getProjectBySlug } from "../content/projects";
 import { Button } from "../components/ui/Button";
-import { ProjectDetail } from "../features/projects/ProjectDetail";
+import { ExperienceDetail } from "../features/experience/ExperienceDetail";
+import { getExperienceBySlug } from "../content/experience";
 
-export function ProjectDetailsPage() {
+export function ExperienceDetailsPage() {
   const { slug } = useParams<{ slug: string }>();
-  const project = slug ? getProjectBySlug(slug) : undefined;
+  const experience = slug ? getExperienceBySlug(slug) : undefined;
 
-  if (!project) {
+  if (!experience) {
     return (
       <PageContainer>
         <div className='mx-auto max-w-4xl px-4 py-8 sm:py-10'>
@@ -16,20 +16,21 @@ export function ProjectDetailsPage() {
             <div className='space-y-4'>
               <div>
                 <h1 className='text-2xl font-semibold tracking-tight text-text sm:text-3xl'>
-                  Project not found
+                  Experience not found
                 </h1>
                 <p className='mt-3 text-sm leading-7 text-text-muted sm:text-base'>
-                  We couldn&apos;t find a project for{" "}
+                  We couldn&apos;t find a record for{" "}
                   <span className='break-words font-mono text-text'>
                     {slug ?? "unknown slug"}
                   </span>
-                  . Please feel free to explore the rest of my projects.
+                  . Please feel free to explore the rest of my career
+                  experience.
                 </p>
               </div>
 
               <div>
-                <Button variant='primary' to='/projects'>
-                  Back to Projects
+                <Button variant='primary' to='/experience'>
+                  Back to Experience
                 </Button>
               </div>
             </div>
@@ -41,7 +42,7 @@ export function ProjectDetailsPage() {
 
   return (
     <PageContainer>
-      <ProjectDetail project={project} />
+      <ExperienceDetail experience={experience} />
     </PageContainer>
   );
 }
