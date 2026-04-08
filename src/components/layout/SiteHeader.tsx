@@ -42,7 +42,7 @@ export function SiteHeader() {
   return (
     <>
       {/* Whole header element */}
-      <header className='sticky, top-0 z-40 border-b border-border bg-surface/90 backdrop-blur'>
+      <header className='sticky top-0 z-40 border-b border-border bg-surface/90 '>
         {/* Contains nav items & logo */}
         <div className='mx-auto max-w-6xl px-4'>
           <div className='flex items-center justify-between gap-4 py-4'>

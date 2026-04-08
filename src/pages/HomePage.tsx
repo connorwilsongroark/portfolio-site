@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
 import { PageContainer } from "../components/layout/PageContainer";
 import { DynamicSignature } from "../components/branding/DynamicSignature";
+import { Button } from "../components/ui/Button";
+import { CodeXml, Contact } from "lucide-react";
 
 export function HomePage() {
   return (
@@ -40,12 +42,22 @@ export function HomePage() {
           </p>
 
           <div className='mt-8 flex gap-4'>
-            <Link
-              to='/projects'
-              className='rounded-xl bg-primary px-5 py-3 text-primary-foreground'
+            <Button
+              variant='primary'
+              size='lg'
+              to='/career'
+              rightIcon={<CodeXml className='h-5 w-5' />}
             >
-              View Projects
-            </Link>
+              View Career
+            </Button>
+            <Button
+              variant='secondary'
+              size='lg'
+              to='/contact'
+              rightIcon={<Contact className='h-5 w-5' />}
+            >
+              Contact Me
+            </Button>
           </div>
         </div>
       </section>
