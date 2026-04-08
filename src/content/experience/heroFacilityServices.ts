@@ -22,8 +22,8 @@ export const heroFacilityServicesExperience: Experience = {
   workplaceType: "on-site",
 
   dates: {
-    startedAt: "2021",
-    endedAt: "2025",
+    startedAt: "2024-02",
+    endedAt: "2025-10",
   },
 
   responsibilities: [
@@ -158,10 +158,16 @@ export const heroFacilityServicesExperience: Experience = {
     "Over time, I found that my strengths were less about writing large amounts of code and more about understanding how systems should behave. In a complex, undocumented environment, the biggest wins often came from clarifying business rules, improving data structures, and making system behavior more transparent. By working directly with stakeholders and defining practical MVPs, I was able to reduce unnecessary complexity and deliver solutions that aligned closely with business needs. I developed a strong belief that effective software development is as much about communication, understanding, and simplification as it is about implementation.",
 
   relatedProjects: [
-    { slug: "roc3-employee-rewards", relationship: "primary-project" },
-    { slug: "employee-org-chart", relationship: "primary-project" },
-    { slug: "employee-performance-grading", relationship: "primary-project" },
-    { slug: "vendor-grading", relationship: "primary-project" },
+    { slug: "roc3-employee-rewards-program", relationship: "primary-project" },
+    { slug: "employee-organizational-chart", relationship: "primary-project" },
+    {
+      slug: "employee-performance-grading-system",
+      relationship: "primary-project",
+    },
+    {
+      slug: "vendor-grading-and-selection-analytics",
+      relationship: "primary-project",
+    },
   ],
 
   confidentiality: {

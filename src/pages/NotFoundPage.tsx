@@ -1,9 +1,10 @@
 import { PageContainer } from "../components/layout/PageContainer";
+import { NotFoundSection } from "../components/NotFoundSection";
 
-export function ExperiencePage() {
+export function NotFoundPage() {
   return (
     <PageContainer>
-      <h1 className='text-3xl font-bold sm:text-4xl'>Experience</h1>
+      <NotFoundSection />
     </PageContainer>
   );
 }

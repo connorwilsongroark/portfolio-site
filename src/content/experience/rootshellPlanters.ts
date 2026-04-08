@@ -17,6 +17,7 @@ export const rootshellPlantersExperience: Experience = {
   status: "completed",
   visibility: "public",
   employmentType: "full-time",
+  workplaceType: "on-site",
 
   dates: {
     startedAt: "2019-11",
@@ -122,7 +123,13 @@ export const rootshellPlantersExperience: Experience = {
   reflection:
     "Running Rootshell Planters taught me that good outcomes come from understanding how all parts of a system connect: customer demand, product design, marketing, user experience, operations, and fulfillment. It reinforced my instinct to use data and observation to guide decisions rather than guessing. It also played a major role in my transition into software development, because building and customizing my storefront showed me how much I enjoyed improving digital experiences and solving practical problems through technology.",
 
-  links: [],
+  links: [
+    {
+      label: "Rootshell Planters",
+      url: "https://www.rootshellplanters.com/",
+      type: "company",
+    },
+  ],
 
   confidentiality: undefined,
 };

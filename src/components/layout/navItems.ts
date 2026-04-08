@@ -5,7 +5,7 @@ export type NavItemConfig = {
 
 export const headerNavItems: NavItemConfig[] = [
   { to: "/", label: "Home" },
+  { to: "/career", label: "Career" },
   { to: "/projects", label: "Projects" },
-  { to: "/experience", label: "Experience" },
   { to: "/contact", label: "Contact" },
 ] as const;

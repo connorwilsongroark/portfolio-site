@@ -3,6 +3,7 @@ import { PageContainer } from "../components/layout/PageContainer";
 import { getProjectBySlug } from "../content/projects";
 import { Button } from "../components/ui/Button";
 import { ProjectDetail } from "../features/projects/ProjectDetail";
+import { NotFoundSection } from "../components/NotFoundSection";
 
 export function ProjectDetailsPage() {
   const { slug } = useParams<{ slug: string }>();
@@ -11,30 +12,10 @@ export function ProjectDetailsPage() {
   if (!project) {
     return (
       <PageContainer>
-        <div className='mx-auto max-w-4xl px-4 py-8 sm:py-10'>
-          <div className='rounded-xl border border-border bg-surface p-5 shadow-sm sm:p-6'>
-            <div className='space-y-4'>
-              <div>
-                <h1 className='text-2xl font-semibold tracking-tight text-text sm:text-3xl'>
-                  Project not found
-                </h1>
-                <p className='mt-3 text-sm leading-7 text-text-muted sm:text-base'>
-                  We couldn&apos;t find a project for{" "}
-                  <span className='break-words font-mono text-text'>
-                    {slug ?? "unknown slug"}
-                  </span>
-                  . Please feel free to explore the rest of my projects.
-                </p>
-              </div>
-
-              <div>
-                <Button variant='primary' to='/projects'>
-                  Back to Projects
-                </Button>
-              </div>
-            </div>
-          </div>
-        </div>
+        <NotFoundSection
+          title='Project not found'
+          description='This project could not be found. It may have been moved or is no longer available.'
+        />
       </PageContainer>
     );
   }

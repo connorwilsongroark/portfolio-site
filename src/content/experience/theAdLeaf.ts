@@ -17,6 +17,7 @@ export const theAdLeafExperience: Experience = {
   status: "completed",
   visibility: "public",
   employmentType: "contract",
+  workplaceType: "on-site",
 
   dates: {
     startedAt: "2022-01",

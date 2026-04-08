@@ -107,7 +107,14 @@ export function DirectionalRouteTransition({
   };
 
   return (
-    <AnimatePresence mode='wait' initial={false} custom={transitionContext}>
+    <AnimatePresence
+      mode='wait'
+      initial={false}
+      custom={transitionContext}
+      onExitComplete={() => {
+        window.scrollTo(0, 0);
+      }}
+    >
       <motion.div
         key={location.pathname}
         custom={transitionContext}

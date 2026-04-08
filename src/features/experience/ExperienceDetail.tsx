@@ -1,174 +1,402 @@
+import { Link } from "react-router-dom";
 import type { Experience } from "../../content/experience/types";
+import type { Project } from "../../content/projects/types";
+import { Badge } from "../../components/ui/Badge";
+import { ExperienceDetailSection } from "./ExperienceDetailSection";
+import { ExperienceProjectList } from "./ExperienceProjectList";
 
-type ExperienceDetailProps = {
+export function ExperienceDetail({
+  experience,
+  relatedProjects,
+}: {
   experience: Experience;
-};
+  relatedProjects: Project[];
+}) {
+  const dateLabel = formatExperienceDateRange(experience);
+  const metadata = [
+    formatEmploymentType(experience.employmentType),
+    experience.workplaceType
+      ? formatWorkplaceType(experience.workplaceType)
+      : undefined,
+    experience.location,
+  ].filter(Boolean);
 
-export function ExperienceDetail({ experience }: ExperienceDetailProps) {
-  return <div>Experience Detail</div>;
+  return (
+    <div className='mx-auto max-w-5xl px-4 py-8 sm:py-10'>
+      <header className='rounded-2xl border border-border bg-surface p-6 shadow-sm sm:p-8'>
+        <div className='flex flex-wrap items-center gap-2'>
+          <Badge>Experience</Badge>
+
+          {experience.status === "current" ? <Badge>Current</Badge> : null}
+
+          {experience.visibility ? (
+            <Badge>{formatVisibility(experience.visibility)}</Badge>
+          ) : null}
+        </div>
+
+        <div className='mt-5'>
+          <p className='text-sm font-medium uppercase tracking-[0.14em] text-text-subtle'>
+            {dateLabel}
+          </p>
+
+          <h1 className='mt-3 text-3xl font-bold tracking-tight text-text sm:text-4xl'>
+            {experience.title}
+          </h1>
+
+          <p className='mt-2 text-lg font-medium text-text-muted sm:text-xl'>
+            {experience.company}
+          </p>
+        </div>
+
+        {metadata.length > 0 ? (
+          <div className='mt-4 flex flex-wrap gap-x-4 gap-y-2 text-sm text-text-subtle'>
+            {metadata.map((item) => (
+              <span key={item}>{item}</span>
+            ))}
+          </div>
+        ) : null}
+
+        {experience.tagline ? (
+          <p className='mt-5 text-base leading-7 text-text sm:text-lg sm:leading-8'>
+            {experience.tagline}
+          </p>
+        ) : null}
+
+        <p className='mt-4 max-w-3xl text-base leading-7 text-text-muted sm:text-lg sm:leading-8'>
+          {experience.summary}
+        </p>
+      </header>
+
+      <div className='mt-8 grid gap-6'>
+        {experience.description ? (
+          <ExperienceDetailSection title='Overview'>
+            <p className='text-sm leading-7 text-text-muted sm:text-base'>
+              {experience.description}
+            </p>
+          </ExperienceDetailSection>
+        ) : null}
+
+        {experience.responsibilities.length > 0 ? (
+          <ExperienceDetailSection title='Responsibilities'>
+            <BulletList items={experience.responsibilities} />
+          </ExperienceDetailSection>
+        ) : null}
+
+        {experience.achievements?.length ? (
+          <ExperienceDetailSection title='Achievements'>
+            <BulletList items={experience.achievements} />
+          </ExperienceDetailSection>
+        ) : null}
+
+        {experience.impact?.length ? (
+          <ExperienceDetailSection title='Impact'>
+            <BulletList items={experience.impact} />
+          </ExperienceDetailSection>
+        ) : null}
+
+        {relatedProjects.length > 0 ? (
+          <ExperienceDetailSection title='Related Projects'>
+            <ExperienceProjectList projects={relatedProjects} />
+          </ExperienceDetailSection>
+        ) : null}
+
+        {hasAnyTechStack(experience) ? (
+          <ExperienceDetailSection title='Tech Stack'>
+            <div className='grid gap-4 sm:grid-cols-2'>
+              <TechStackGroup
+                label='Languages'
+                items={experience.techStack?.languages}
+              />
+              <TechStackGroup
+                label='Frameworks'
+                items={experience.techStack?.frameworks}
+              />
+              <TechStackGroup
+                label='Libraries'
+                items={experience.techStack?.libraries}
+              />
+              <TechStackGroup
+                label='Tools'
+                items={experience.techStack?.tools}
+              />
+              <TechStackGroup
+                label='Databases'
+                items={experience.techStack?.databases}
+              />
+              <TechStackGroup
+                label='Platforms'
+                items={experience.techStack?.platforms}
+              />
+              <TechStackGroup
+                label='Infrastructure'
+                items={experience.techStack?.infrastructure}
+              />
+            </div>
+          </ExperienceDetailSection>
+        ) : null}
+
+        {hasContextSection(experience) ? (
+          <ExperienceDetailSection title='Context & Architecture'>
+            <div className='space-y-6'>
+              {experience.businessContext ? (
+                <ContentBlock
+                  title='Business Context'
+                  items={[experience.businessContext]}
+                />
+              ) : null}
+
+              {experience.notableSystems?.length ? (
+                <ContentBlock
+                  title='Notable Systems'
+                  items={experience.notableSystems}
+                />
+              ) : null}
+
+              {experience.challenges?.length ? (
+                <ContentBlock
+                  title='Challenges'
+                  items={experience.challenges}
+                />
+              ) : null}
+
+              {experience.solutions?.length ? (
+                <ContentBlock title='Solutions' items={experience.solutions} />
+              ) : null}
+
+              {experience.architecturalDecisions?.length ? (
+                <ContentBlock
+                  title='Architectural Decisions'
+                  items={experience.architecturalDecisions}
+                />
+              ) : null}
+
+              {experience.tradeoffs?.length ? (
+                <ContentBlock title='Tradeoffs' items={experience.tradeoffs} />
+              ) : null}
+            </div>
+          </ExperienceDetailSection>
+        ) : null}
+
+        {experience.learningOutcomes?.length || experience.reflection ? (
+          <ExperienceDetailSection title='Reflection'>
+            <div className='space-y-4'>
+              {experience.learningOutcomes?.length ? (
+                <ContentBlock
+                  title='What I Learned'
+                  items={experience.learningOutcomes}
+                />
+              ) : null}
+
+              {experience.reflection ? (
+                <p className='text-sm leading-7 text-text-muted sm:text-base'>
+                  {experience.reflection}
+                </p>
+              ) : null}
+            </div>
+          </ExperienceDetailSection>
+        ) : null}
+
+        {experience.links?.length ? (
+          <ExperienceDetailSection title='Links'>
+            <div className='flex flex-wrap gap-3'>
+              {experience.links.map((link) => (
+                <a
+                  key={`${link.type}-${link.url}`}
+                  href={link.url}
+                  target='_blank'
+                  rel='noreferrer'
+                  className='rounded-full border border-border bg-surface-alt px-3 py-1.5 text-sm font-medium text-text transition-colors hover:bg-surface-alt/70'
+                >
+                  {link.label}
+                </a>
+              ))}
+            </div>
+          </ExperienceDetailSection>
+        ) : null}
+
+        {experience.confidentiality ? (
+          <ExperienceDetailSection title='Confidentiality'>
+            <div className='space-y-3 text-sm leading-7 text-text-muted sm:text-base'>
+              <p>{experience.confidentiality.note}</p>
+
+              {experience.confidentiality.codeUnavailableReason ? (
+                <p>
+                  <span className='font-medium text-text'>
+                    Code availability:
+                  </span>{" "}
+                  {experience.confidentiality.codeUnavailableReason}
+                </p>
+              ) : null}
+            </div>
+          </ExperienceDetailSection>
+        ) : null}
+
+        <div>
+          <Link
+            to='/career'
+            className='text-sm font-medium text-primary transition-colors hover:underline'
+          >
+            Back to Career
+          </Link>
+        </div>
+      </div>
+    </div>
+  );
 }
 
-// import type { Project } from "../../content/projects/types";
-// import { Badge } from "../../components/ui/Badge";
-// import { TechStackBlock, hasTechStackContent } from "./TechStackBlock";
+function BulletList({ items }: { items: string[] }) {
+  return (
+    <ul className='space-y-3'>
+      {items.map((item) => (
+        <li
+          key={item}
+          className='rounded-xl border border-border bg-surface-alt/30 px-4 py-3 text-sm leading-7 text-text-muted sm:text-base'
+        >
+          {item}
+        </li>
+      ))}
+    </ul>
+  );
+}
 
-// type ProjectDetailProps = {
-//   project: Project;
-// };
+function ContentBlock({ title, items }: { title: string; items: string[] }) {
+  return (
+    <div className='space-y-3'>
+      <h3 className='text-sm font-semibold uppercase tracking-[0.14em] text-text-subtle'>
+        {title}
+      </h3>
 
-// type DetailCardProps = {
-//   title: string;
-//   children: React.ReactNode;
-// };
+      <ul className='space-y-3'>
+        {items.map((item) => (
+          <li
+            key={item}
+            className='text-sm leading-7 text-text-muted sm:text-base'
+          >
+            {item}
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
 
-// type BulletListProps = {
-//   items: string[];
-// };
+function TechStackGroup({ label, items }: { label: string; items?: string[] }) {
+  if (!items?.length) {
+    return null;
+  }
 
-// function DetailCard({ title, children }: DetailCardProps) {
-//   return (
-//     <section className='rounded-xl border border-border bg-surface p-5 shadow-sm sm:p-6'>
-//       <h2 className='mb-3 text-lg font-semibold text-text sm:text-xl'>
-//         {title}
-//       </h2>
-//       <div>{children}</div>
-//     </section>
-//   );
-// }
+  return (
+    <div className='space-y-3'>
+      <h3 className='text-sm font-semibold uppercase tracking-[0.14em] text-text-subtle'>
+        {label}
+      </h3>
 
-// function BulletList({ items }: BulletListProps) {
-//   return (
-//     <ul className='list-disc space-y-2 pl-5 text-sm text-text-muted sm:text-base'>
-//       {items.map((item) => (
-//         <li key={item} className='leading-7'>
-//           {item}
-//         </li>
-//       ))}
-//     </ul>
-//   );
-// }
+      <div className='flex flex-wrap gap-2'>
+        {items.map((item) => (
+          <span
+            key={item}
+            className='rounded-full border border-border bg-surface-alt px-3 py-1 text-sm text-text-muted'
+          >
+            {item}
+          </span>
+        ))}
+      </div>
+    </div>
+  );
+}
 
-// function formatDateRange(startedAt?: string, completedAt?: string) {
-//   if (startedAt && completedAt) return `${startedAt} — ${completedAt}`;
-//   if (startedAt) return `${startedAt} — Present`;
-//   if (completedAt) return completedAt;
-//   return "Date unavailable";
-// }
+function formatExperienceDateRange(experience: Experience) {
+  const startedAt = experience.dates.startedAt;
+  const endedAt = experience.dates.endedAt;
+  const isCurrent = experience.dates.isCurrent;
 
-// export function ProjectDetail({ project }: ProjectDetailProps) {
-//   const showTechStack = hasTechStackContent(project.techStack);
+  if (startedAt && endedAt) {
+    return `${startedAt} — ${endedAt}`;
+  }
 
-//   return (
-//     <div className='mx-auto max-w-4xl space-y-6 px-4 py-8 sm:space-y-8'>
-//       <header className='space-y-4'>
-//         <div className='flex flex-wrap gap-2'>
-//           {project.domains?.map((domain) => (
-//             <Badge key={domain}>{domain}</Badge>
-//           ))}
-//           {project.status && <Badge>{project.status}</Badge>}
-//           {project.visibility && <Badge>{project.visibility}</Badge>}
-//         </div>
+  if (startedAt && (isCurrent || !endedAt)) {
+    return `${startedAt} — Present`;
+  }
 
-//         <div>
-//           <h1 className='text-3xl font-bold tracking-tight text-text sm:text-4xl'>
-//             {project.title}
-//           </h1>
-//           <p className='mt-3 text-base leading-7 text-text-muted sm:text-lg sm:leading-8'>
-//             {project.tagline}
-//           </p>
-//         </div>
+  return experience.dates.year
+    ? String(experience.dates.year)
+    : "Date unavailable";
+}
 
-//         <div className='grid gap-3 text-sm text-text-subtle sm:grid-cols-2'>
-//           <p>
-//             <span className='font-medium text-text'>Timeline:</span>{" "}
-//             {formatDateRange(
-//               project.dates?.startedAt,
-//               project.dates?.completedAt,
-//             )}
-//           </p>
+function formatEmploymentType(value: Experience["employmentType"]) {
+  switch (value) {
+    case "full-time":
+      return "Full-time";
+    case "part-time":
+      return "Part-time";
+    case "contract":
+      return "Contract";
+    case "freelance":
+      return "Freelance";
+    case "internship":
+      return "Internship";
+    case "co-op":
+      return "Co-op";
+    case "apprenticeship":
+      return "Apprenticeship";
+    case "temporary":
+      return "Temporary";
+    default:
+      return value;
+  }
+}
 
-//           {project.role && project.role.length > 0 && (
-//             <p>
-//               <span className='font-medium text-text'>Role:</span>{" "}
-//               {project.role.join(", ")}
-//             </p>
-//           )}
-//         </div>
-//       </header>
+function formatWorkplaceType(value: NonNullable<Experience["workplaceType"]>) {
+  switch (value) {
+    case "on-site":
+      return "On-site";
+    case "hybrid":
+      return "Hybrid";
+    case "remote":
+      return "Remote";
+    default:
+      return value;
+  }
+}
 
-//       {project.summary && (
-//         <DetailCard title='Overview'>
-//           <p className='text-sm leading-7 text-text-muted sm:text-base'>
-//             {project.summary}
-//           </p>
-//         </DetailCard>
-//       )}
+function formatVisibility(value: NonNullable<Experience["visibility"]>) {
+  switch (value) {
+    case "public":
+      return "Public";
+    case "private":
+      return "Private";
+    case "proprietary":
+      return "Proprietary";
+    default:
+      return value;
+  }
+}
 
-//       {project.problem && (
-//         <DetailCard title='Problem'>
-//           <p className='text-sm leading-7 text-text-muted sm:text-base'>
-//             {project.problem}
-//           </p>
-//         </DetailCard>
-//       )}
+function hasAnyTechStack(experience: Experience) {
+  const stack = experience.techStack;
 
-//       {project.goals && project.goals.length > 0 && (
-//         <DetailCard title='Goals'>
-//           <BulletList items={project.goals} />
-//         </DetailCard>
-//       )}
+  if (!stack) {
+    return false;
+  }
 
-//       {project.features && project.features.length > 0 && (
-//         <DetailCard title='Key features'>
-//           <BulletList items={project.features} />
-//         </DetailCard>
-//       )}
+  return Boolean(
+    stack.languages?.length ||
+    stack.frameworks?.length ||
+    stack.libraries?.length ||
+    stack.tools?.length ||
+    stack.databases?.length ||
+    stack.platforms?.length ||
+    stack.infrastructure?.length,
+  );
+}
 
-//       {(project.challenges?.length || project.solutions?.length) && (
-//         <div className='grid gap-5 sm:gap-6 md:grid-cols-2'>
-//           {project.challenges && project.challenges.length > 0 && (
-//             <DetailCard title='Challenges'>
-//               <BulletList items={project.challenges} />
-//             </DetailCard>
-//           )}
-
-//           {project.solutions && project.solutions.length > 0 && (
-//             <DetailCard title='Solutions'>
-//               <BulletList items={project.solutions} />
-//             </DetailCard>
-//           )}
-//         </div>
-//       )}
-
-//       {(project.architecturalDecisions?.length ||
-//         project.tradeoffs?.length) && (
-//         <div className='grid gap-5 sm:gap-6 md:grid-cols-2'>
-//           {project.architecturalDecisions &&
-//             project.architecturalDecisions.length > 0 && (
-//               <DetailCard title='Architectural decisions'>
-//                 <BulletList items={project.architecturalDecisions} />
-//               </DetailCard>
-//             )}
-
-//           {project.tradeoffs && project.tradeoffs.length > 0 && (
-//             <DetailCard title='Tradeoffs'>
-//               <BulletList items={project.tradeoffs} />
-//             </DetailCard>
-//           )}
-//         </div>
-//       )}
-
-//       {project.learningOutcomes && project.learningOutcomes.length > 0 && (
-//         <DetailCard title='What I learned'>
-//           <BulletList items={project.learningOutcomes} />
-//         </DetailCard>
-//       )}
-
-//       {showTechStack && (
-//         <DetailCard title='Tech stack'>
-//           <TechStackBlock techStack={project.techStack} />
-//         </DetailCard>
-//       )}
-//     </div>
-//   );
-// }
+function hasContextSection(experience: Experience) {
+  return Boolean(
+    experience.businessContext ||
+    experience.notableSystems?.length ||
+    experience.challenges?.length ||
+    experience.solutions?.length ||
+    experience.architecturalDecisions?.length ||
+    experience.tradeoffs?.length,
+  );
+}
