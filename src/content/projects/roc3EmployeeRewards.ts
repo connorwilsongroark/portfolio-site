@@ -1,3 +1,4 @@
+import { RewardsUserStarIcon } from "../../features/projects/icons/RewardUserStarIcon";
 import type { Project } from "./types";
 
 export const roc3EmployeeRewardsProject: Project = {
@@ -179,4 +180,5 @@ export const roc3EmployeeRewardsProject: Project = {
     notes:
       "This project was built for internal use and is not publicly available.",
   },
+  projectIcon: RewardsUserStarIcon,
 };

@@ -1,3 +1,4 @@
+import { OrgChartIcon } from "../../features/projects/icons/OrgChartIcon";
 import type { Project } from "./types";
 
 export const employeeOrgChartProject: Project = {
@@ -161,4 +162,5 @@ export const employeeOrgChartProject: Project = {
     notes:
       "This work was developed for internal business operations and is not publicly available.",
   },
+  projectIcon: OrgChartIcon,
 };

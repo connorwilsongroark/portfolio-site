@@ -1,3 +1,4 @@
+import { VendorGradingIcon } from "../../features/projects/icons/VendorGradingIcon";
 import type { Project } from "./types";
 
 export const vendorGradingProject: Project = {
@@ -171,4 +172,5 @@ export const vendorGradingProject: Project = {
     notes:
       "This project was developed for internal business operations and is not publicly available.",
   },
+  projectIcon: VendorGradingIcon,
 };

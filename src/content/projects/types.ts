@@ -1,5 +1,7 @@
 // src/data/projects/types.ts
 
+import type { ComponentType, SVGProps } from "react";
+
 // -----------------------------
 // Core classifications
 // -----------------------------
@@ -53,6 +55,7 @@ export type ProjectPresentation =
   | "technical-deep-dive"
   | "prototype-showcase";
 
+export type ProjectIconComponent = ComponentType<SVGProps<SVGSVGElement>>;
 // -----------------------------
 // Links & artifacts
 // -----------------------------
@@ -204,4 +207,7 @@ export interface Project {
   // Ownership / access
   proprietaryDetails?: ProprietaryDetails;
   codeAvailability?: CodeAvailability;
+
+  // Styling and Icons
+  projectIcon?: ProjectIconComponent;
 }

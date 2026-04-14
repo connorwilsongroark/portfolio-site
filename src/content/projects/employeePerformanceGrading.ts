@@ -1,3 +1,4 @@
+import { EmployeeGradingIcon } from "../../features/projects/icons/EmployeeGradingIcon";
 import type { Project } from "./types";
 
 export const employeeGradingProject: Project = {
@@ -160,4 +161,5 @@ export const employeeGradingProject: Project = {
     notes:
       "This project was developed for internal business reporting and is not publicly available.",
   },
+  projectIcon: EmployeeGradingIcon,
 };

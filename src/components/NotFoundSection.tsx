@@ -9,7 +9,7 @@ type NotFoundSectionProps = {
 
 export function NotFoundSection({
   title = "Page not found",
-  description = "The page you’re looking for doesn’t exist or may have been moved.",
+  description = "The page you're looking for doesn't exist or may have been moved.",
   showActions = true,
 }: NotFoundSectionProps) {
   return (

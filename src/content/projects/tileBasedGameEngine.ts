@@ -1,4 +1,5 @@
 import type { Project } from "./types";
+import { DiamondGridIcon } from "../../features/projects/icons/DiamondGridIcon";
 
 export const tileBasedGameEngineProject: Project = {
   slug: "tile-based-game-engine",
@@ -117,4 +118,5 @@ export const tileBasedGameEngineProject: Project = {
     isDemoPublic: false,
     notes: "Actively in development and evolving rapidly.",
   },
+  projectIcon: DiamondGridIcon,
 };

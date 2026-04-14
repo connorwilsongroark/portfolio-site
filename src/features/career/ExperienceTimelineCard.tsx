@@ -102,6 +102,7 @@ export function ExperienceTimelineCard({
                 slug={project.slug}
                 title={project.title}
                 tagline={project.tagline}
+                icon={project.projectIcon}
               />
             ))}
           </div>
