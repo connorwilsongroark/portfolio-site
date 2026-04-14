@@ -7,6 +7,9 @@ import { employeeOrgChartProject } from "./employeeOrgChart";
 import { roc3EmployeeRewardsProject } from "./roc3EmployeeRewards";
 import { tileBasedGameEngineProject } from "./tileBasedGameEngine";
 import { vendorGradingProject } from "./vendorGrading";
+import { patternAtlasProject } from "./patternAtlas";
+import { superbowlSquaresProject } from "./superBowlSquares";
+import { tradeRateManagementProject } from "./tradeRates";
 
 // Re-export individual project modules
 export { employeeGradingProject } from "./employeePerformanceGrading";
@@ -14,6 +17,9 @@ export { employeeOrgChartProject } from "./employeeOrgChart";
 export { roc3EmployeeRewardsProject } from "./roc3EmployeeRewards";
 export { tileBasedGameEngineProject } from "./tileBasedGameEngine";
 export { vendorGradingProject } from "./vendorGrading";
+export { patternAtlasProject } from "./patternAtlas";
+export { superbowlSquaresProject } from "./superBowlSquares";
+export { tradeRateManagementProject } from "./tradeRates";
 
 // Master collection
 export const projects: Project[] = [
@@ -22,6 +28,9 @@ export const projects: Project[] = [
   employeeGradingProject,
   vendorGradingProject,
   employeeOrgChartProject,
+  patternAtlasProject,
+  superbowlSquaresProject,
+  tradeRateManagementProject,
 ];
 
 // Basic queries

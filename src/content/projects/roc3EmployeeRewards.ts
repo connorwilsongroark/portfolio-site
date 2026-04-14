@@ -9,7 +9,7 @@ export const roc3EmployeeRewardsProject: Project = {
 
   summary:
     "Redesigned and rebuilt an internal employee rewards system from the ground up, replacing a rigid and difficult-to-maintain implementation with a flexible, transaction-based architecture. The system introduced a unified concept of transactions and operations (add/subtract) to model all balance-affecting events, including awards, purchases, raffles, and peer-to-peer gifting. I designed a multi-tenant SQL Server schema that allowed reward definitions to vary across companies while maintaining a shared transaction system. A full audit log captured every transaction event across all companies, enabling accurate balance calculations, historical analysis, and traceability. To ensure data integrity, all balance-changing operations were encapsulated in a centralized stored procedure that executed account updates, audit inserts, and related mutations atomically, preventing inconsistencies between derived and source data. The platform included a Windows Forms storefront for employees and a robust administrative dashboard with claims-based access control, allowing non-developers to configure rewards, inventory, and program behavior without code changes. The system also included automated inventory refresh and expiration handling, a library of reusable SQL views, and daily SQL Server Agent reports that summarized reward activity, spending behavior, and engagement trends for leadership.",
-
+  featured: true,
   era: "recent",
   dates: {
     startedAt: "2024-07",

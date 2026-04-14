@@ -5,7 +5,7 @@ import type { Experience } from "./types";
 export const heroFacilityServicesExperience: Experience = {
   slug: "hero-facility-services-software-developer",
   company: "Hero Facility Services",
-  title: "Software Developer",
+  title: "Software Developer II",
 
   tagline:
     "High-trust developer and system expert who translated complex business workflows into maintainable, data-driven software.",
@@ -168,6 +168,8 @@ export const heroFacilityServicesExperience: Experience = {
       slug: "vendor-grading-and-selection-analytics",
       relationship: "primary-project",
     },
+    { slug: "superbowl-squares-system", relationship: "primary-project" },
+    { slug: "trade-rate-management-system", relationship: "primary-project" },
   ],
 
   confidentiality: {

@@ -8,7 +8,7 @@ export const vendorGradingProject: Project = {
     "A configurable vendor evaluation system with a reusable UI component and historical tracking of vendor performance.",
   summary:
     "Designed and implemented a vendor grading system that enabled the business to compare vendors using operational, financial, and customer-facing metrics. The system evaluated factors such as QA survey results, vendor response time, proposal and invoice turnaround, profit margins, and payment terms. I built a SQL-based grading engine and paired it with a Windows Forms administrative UI that allowed authorized users to configure penalties, bonuses, and relative metric weights without code changes. Vendor grades were also persisted to audit tables over time, enabling trend analysis and visibility into how vendor performance evolved. The system included a reusable, color-coded UI component used across the application to display vendor grades, metric breakdowns, and scoring transparency through hover interactions. Many of the grading metrics themselves were defined by me and approved by ownership, reflecting a deep understanding of the company’s operations and vendor-selection priorities.",
-
+  featured: true,
   era: "recent",
   dates: {
     startedAt: "2025-02",
