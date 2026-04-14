@@ -1,7 +1,6 @@
 import { useParams } from "react-router-dom";
 import { PageContainer } from "../components/layout/PageContainer";
 import { getProjectBySlug } from "../content/projects";
-import { Button } from "../components/ui/Button";
 import { ProjectDetail } from "../features/projects/ProjectDetail";
 import { NotFoundSection } from "../components/NotFoundSection";
 
