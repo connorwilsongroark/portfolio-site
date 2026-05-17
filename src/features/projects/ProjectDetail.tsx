@@ -1,6 +1,7 @@
 import type { Project } from "../../content/projects/types";
 import { Badge } from "../../components/ui/Badge";
 import { TechStackBlock, hasTechStackContent } from "./TechStackBlock";
+import { Link } from "react-router-dom";
 
 type ProjectDetailProps = {
   project: Project;
@@ -45,28 +46,58 @@ function formatDateRange(startedAt?: string, completedAt?: string) {
   return "Date unavailable";
 }
 
+function formatLabel(value: string) {
+  return value
+    .split("-")
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(" ");
+}
+
 export function ProjectDetail({ project }: ProjectDetailProps) {
   const showTechStack = hasTechStackContent(project.techStack);
 
   return (
     <div className='mx-auto max-w-4xl space-y-6 px-4 py-8 sm:space-y-8'>
-      <header className='space-y-4'>
+      <header className='space-y-5'>
         <div className='flex flex-wrap gap-2'>
           {project.domains?.map((domain) => (
-            <Badge key={domain}>{domain}</Badge>
+            <Badge key={domain}>{formatLabel(domain)}</Badge>
           ))}
-          {project.status && <Badge>{project.status}</Badge>}
-          {project.visibility && <Badge>{project.visibility}</Badge>}
+          {project.status && <Badge>{formatLabel(project.status)}</Badge>}
+          {project.visibility && (
+            <Badge>{formatLabel(project.visibility)}</Badge>
+          )}
         </div>
 
         <div>
           <h1 className='text-3xl font-bold tracking-tight text-text sm:text-4xl'>
             {project.title}
           </h1>
+
           <p className='mt-3 text-base leading-7 text-text-muted sm:text-lg sm:leading-8'>
             {project.tagline}
           </p>
         </div>
+
+        {project.links && project.links.length > 0 && (
+          <div className='flex flex-wrap gap-3'>
+            {project.links.map((link) => (
+              <a
+                key={link.url}
+                href={link.url}
+                target='_blank'
+                rel='noreferrer'
+                className={
+                  link.type === "live"
+                    ? "inline-flex items-center justify-center rounded-lg bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition hover:opacity-90"
+                    : "inline-flex items-center justify-center rounded-lg border border-border bg-surface px-4 py-2 text-sm font-medium text-text transition hover:bg-surface-alt"
+                }
+              >
+                {link.label}
+              </a>
+            ))}
+          </div>
+        )}
 
         <div className='grid gap-3 text-sm text-text-subtle sm:grid-cols-2'>
           <p>
@@ -80,7 +111,21 @@ export function ProjectDetail({ project }: ProjectDetailProps) {
           {project.role && project.role.length > 0 && (
             <p>
               <span className='font-medium text-text'>Role:</span>{" "}
-              {project.role.join(", ")}
+              {project.role.map(formatLabel).join(", ")}
+            </p>
+          )}
+
+          {project.presentation && (
+            <p>
+              <span className='font-medium text-text'>Presentation:</span>{" "}
+              {formatLabel(project.presentation)}
+            </p>
+          )}
+
+          {project.dates?.year && (
+            <p>
+              <span className='font-medium text-text'>Year:</span>{" "}
+              {project.dates.year}
             </p>
           )}
         </div>
@@ -91,6 +136,34 @@ export function ProjectDetail({ project }: ProjectDetailProps) {
           <p className='text-sm leading-7 text-text-muted sm:text-base'>
             {project.summary}
           </p>
+        </DetailCard>
+      )}
+
+      {project.description && (
+        <DetailCard title='Project description'>
+          <p className='text-sm leading-7 text-text-muted sm:text-base'>
+            {project.description}
+          </p>
+        </DetailCard>
+      )}
+
+      {project.metrics && project.metrics.length > 0 && (
+        <DetailCard title='Project snapshot'>
+          <dl className='grid gap-4 sm:grid-cols-2'>
+            {project.metrics.map((metric) => (
+              <div
+                key={metric.label}
+                className='rounded-lg border border-border bg-surface-alt p-4'
+              >
+                <dt className='text-xs font-semibold uppercase tracking-wide text-text-subtle'>
+                  {metric.label}
+                </dt>
+                <dd className='mt-1 text-sm leading-6 text-text-muted'>
+                  {metric.value}
+                </dd>
+              </div>
+            ))}
+          </dl>
         </DetailCard>
       )}
 
@@ -105,6 +178,12 @@ export function ProjectDetail({ project }: ProjectDetailProps) {
       {project.goals && project.goals.length > 0 && (
         <DetailCard title='Goals'>
           <BulletList items={project.goals} />
+        </DetailCard>
+      )}
+
+      {project.users && project.users.length > 0 && (
+        <DetailCard title='Intended users'>
+          <BulletList items={project.users} />
         </DetailCard>
       )}
 
@@ -159,6 +238,53 @@ export function ProjectDetail({ project }: ProjectDetailProps) {
           <TechStackBlock techStack={project.techStack} />
         </DetailCard>
       )}
+
+      {project.tags && project.tags.length > 0 && (
+        <DetailCard title='Tags'>
+          <div className='flex flex-wrap gap-2'>
+            {project.tags.map((tag) => (
+              <Badge key={tag}>{tag}</Badge>
+            ))}
+          </div>
+        </DetailCard>
+      )}
+
+      {project.codeAvailability && (
+        <DetailCard title='Code availability'>
+          <div className='space-y-3 text-sm leading-7 text-text-muted sm:text-base'>
+            <p>
+              <span className='font-medium text-text'>Source public:</span>{" "}
+              {project.codeAvailability.isSourcePublic ? "Yes" : "No"}
+            </p>
+
+            <p>
+              <span className='font-medium text-text'>Demo public:</span>{" "}
+              {project.codeAvailability.isDemoPublic ? "Yes" : "No"}
+            </p>
+
+            {project.codeAvailability.notes && (
+              <p>{project.codeAvailability.notes}</p>
+            )}
+
+            {project.codeAvailability.repositoryUrl && (
+              <a
+                href={project.codeAvailability.repositoryUrl}
+                target='_blank'
+                rel='noreferrer'
+                className='inline-flex items-center justify-center rounded-lg border border-border bg-surface-alt px-4 py-2 text-sm font-medium text-text transition hover:bg-surface'
+              >
+                View repository
+              </a>
+            )}
+          </div>
+        </DetailCard>
+      )}
+      <Link
+        to='/projects'
+        className='inline-flex items-center justify-center rounded-lg border border-border bg-surface px-4 py-2 text-sm font-medium text-text transition hover:bg-surface-alt'
+      >
+        Back to Projects
+      </Link>
     </div>
   );
 }

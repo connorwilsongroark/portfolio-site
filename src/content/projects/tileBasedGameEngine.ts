@@ -112,8 +112,15 @@ export const tileBasedGameEngineProject: Project = {
     { label: "Simulation model", value: "Deterministic fixed-timestep" },
     { label: "Rendering", value: "Canvas-based with layered passes" },
   ],
-
+  links: [
+    {
+      label: "Source Code",
+      url: "https://github.com/connorwilsongroark/grid-engine",
+      type: "github",
+    },
+  ],
   codeAvailability: {
+    repositoryUrl: "https://github.com/connorwilsongroark/grid-engine",
     isSourcePublic: true,
     isDemoPublic: false,
     notes: "Actively in development and evolving rapidly.",

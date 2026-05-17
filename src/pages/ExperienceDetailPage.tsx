@@ -3,7 +3,6 @@ import { PageContainer } from "../components/layout/PageContainer";
 import { NotFoundSection } from "../components/NotFoundSection";
 import { getExperienceBySlug } from "../content/experience";
 import { getProjectBySlug } from "../content/projects";
-import { ExperienceDetail } from "../features/experience/ExperienceDetail";
 import { ExperienceDetails } from "../features/experience/ExperienceDetails";
 export function ExperienceDetailsPage() {
   const { slug } = useParams<{ slug: string }>();
@@ -31,7 +30,7 @@ export function ExperienceDetailsPage() {
     <PageContainer>
       <ExperienceDetails
         experience={experience}
-        //relatedProjects={relatedProjects}
+        relatedProjects={relatedProjects}
       />
     </PageContainer>
   );

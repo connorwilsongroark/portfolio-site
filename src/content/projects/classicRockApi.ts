@@ -16,7 +16,7 @@ export const classicRockApiProject: Project = {
 
   featured: true,
   era: "featured",
-  presentation: "case-study",
+  presentation: "prototype-showcase",
 
   dates: {
     startedAt: "2026-04",
@@ -81,7 +81,7 @@ export const classicRockApiProject: Project = {
   },
 
   problem:
-    "Many music-related applications expose simplistic or inconsistent APIs that do not model relationships cleanly, scale well architecturally, or demonstrate professional backend design practices. The project was designed to explore how a modern full-stack application can combine relational modeling, clean API contracts, authorization, and maintainable UI architecture in a cohesive system.",
+    "Many applications expose simplistic or inconsistent APIs that do not model relationships cleanly, scale well architecturally, or demonstrate professional backend design practices. The project was designed to explore how a modern full-stack application can combine relational modeling, clean API contracts, authorization, and maintainable UI architecture in a cohesive system.",
 
   goals: [
     "Build a modern REST API using ASP.NET Core Minimal APIs",
@@ -180,14 +180,14 @@ export const classicRockApiProject: Project = {
 
   links: [
     {
-      label: "Source Code",
-      url: "https://github.com/connorwilsongroark/ClassicRockApi",
-      type: "github",
-    },
-    {
       label: "Admin Dashboard",
       url: "https://connorwilsongroark.github.io/ClassicRockApi/",
       type: "live",
+    },
+    {
+      label: "Source Code",
+      url: "https://github.com/connorwilsongroark/ClassicRockApi",
+      type: "github",
     },
   ],
 
