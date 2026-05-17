@@ -4,6 +4,7 @@ import { NotFoundSection } from "../components/NotFoundSection";
 import { getExperienceBySlug } from "../content/experience";
 import { getProjectBySlug } from "../content/projects";
 import { ExperienceDetail } from "../features/experience/ExperienceDetail";
+import { ExperienceDetails } from "../features/experience/ExperienceDetails";
 export function ExperienceDetailsPage() {
   const { slug } = useParams<{ slug: string }>();
   const experience = slug ? getExperienceBySlug(slug) : undefined;
@@ -28,9 +29,9 @@ export function ExperienceDetailsPage() {
 
   return (
     <PageContainer>
-      <ExperienceDetail
+      <ExperienceDetails
         experience={experience}
-        relatedProjects={relatedProjects}
+        //relatedProjects={relatedProjects}
       />
     </PageContainer>
   );

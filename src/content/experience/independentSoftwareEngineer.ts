@@ -32,5 +32,9 @@ export const independentSoftwareEngineerExperience: Experience = {
       slug: "pattern-atlas",
       relationship: "feature-delivery",
     },
+    {
+      slug: "classic-rock-api",
+      relationship: "primary-project",
+    },
   ],
 };

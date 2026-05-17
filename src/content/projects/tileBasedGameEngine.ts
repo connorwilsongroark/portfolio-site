@@ -9,13 +9,13 @@ export const tileBasedGameEngineProject: Project = {
   summary:
     "Building a tile-based game engine from scratch in TypeScript using a deterministic tick-based simulation model. The project explores core engine architecture concepts including entity-component systems, event-driven design, pathfinding, input handling, and rendering pipelines. The focus is on understanding how real-time systems are structured by building core engine systems from first principles instead of relying on existing frameworks.",
 
-  era: "featured",
+  era: "recent",
   dates: {
     startedAt: "2026-02",
     completedAt: undefined,
     year: 2026,
   },
-  featured: true,
+  featured: false,
 
   domains: ["frontend", "architecture", "game-dev"],
   role: ["sole-developer"],

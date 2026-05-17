@@ -10,6 +10,7 @@ import { vendorGradingProject } from "./vendorGrading";
 import { patternAtlasProject } from "./patternAtlas";
 import { superbowlSquaresProject } from "./superBowlSquares";
 import { tradeRateManagementProject } from "./tradeRates";
+import { classicRockApiProject } from "./classicRockApi";
 
 // Re-export individual project modules
 export { employeeGradingProject } from "./employeePerformanceGrading";
@@ -20,6 +21,7 @@ export { vendorGradingProject } from "./vendorGrading";
 export { patternAtlasProject } from "./patternAtlas";
 export { superbowlSquaresProject } from "./superBowlSquares";
 export { tradeRateManagementProject } from "./tradeRates";
+export { classicRockApiProject } from "./classicRockApi";
 
 // Master collection
 export const projects: Project[] = [
@@ -31,6 +33,7 @@ export const projects: Project[] = [
   patternAtlasProject,
   superbowlSquaresProject,
   tradeRateManagementProject,
+  classicRockApiProject,
 ];
 
 // Basic queries
